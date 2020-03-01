@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Link, useLocation } from "react-router-dom";
 import Axios from "axios";
-import ReactQueryParams from 'react-query-params';
-import Appbar from './react_components/Appbar';
-import Status from './react_components/StatusCard';
-import ProgBar from './react_components/ProgressBar';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper'
+import ReactQueryParams from "react-query-params";
+import Appbar from "./react_components/Appbar";
+import Status from "./react_components/StatusCard";
+import ProgBar from "./react_components/ProgressBar";
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
 const request = require("request");
 const apiKey = process.env.CHECKBOOK_API_KEY;
 const clientId = process.env.CHECKBOOK_CLIENT_ID;
@@ -14,18 +14,20 @@ const apiSecret = process.env.CHECKBOOK_API_SECRET;
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    color: 'rgb(240,240,240)',
-    display: 'flex',
-    flexWrap: 'wrap',
-    position: 'absolute', left: '50%', top: '50%',
-    transform: 'translate(-50%, -50%)',
-    '& > *': {
+    color: "rgb(240,240,240)",
+    display: "flex",
+    flexWrap: "wrap",
+    position: "absolute",
+    left: "50%",
+    top: "50%",
+    transform: "translate(-50%, -50%)",
+    "& > *": {
       margin: theme.spacing(10),
       width: theme.spacing(20),
       height: theme.spacing(30),
-      padding: theme.spacing(20),
-    },
-  },
+      padding: theme.spacing(20)
+    }
+  }
 }));
 export default class App extends ReactQueryParams {
   constructor(props) {
@@ -80,23 +82,39 @@ export default class App extends ReactQueryParams {
   }
 
   render() {
-    
     return (
       <Router>
-       <div> 
-         <Appbar></Appbar>
-         <Status></Status>
-         <div className={useStyles.paper}>
-        <Paper elevation={4}> 
-        <ProgBar></ProgBar>
-       </Paper>
-      </div>  
-       </div>
-       <div>Email: {this.queryParams.email}</div>
-       <div>Cost: {this.queryParams.cost}</div>
-       <div>Invoice ID: {this.state.invoice_id}</div>
-       <div>Status: {this.state.status}</div> 
+        <div>
+          <Appbar></Appbar>
+          <StatusComponent status={this.state.status} />
+        </div>
+        <div>Email: {this.queryParams.email}</div>
+        <div>Cost: {this.queryParams.cost}</div>
+        <div>Invoice ID: {this.state.invoice_id}</div>
+        <div>Status: {this.state.status}</div>
       </Router>
     );
+  }
+}
+
+function StatusComponent(props) {
+  if (props.status == "UNPAID") {
+    return (
+      <div>
+        <div className={useStyles.paper}>
+          <Status />
+          <Paper elevation={4}>
+            <ProgBar></ProgBar>
+          </Paper>
+        </div>
+      </div>
+    );
+  } else if (props.status == "PAID") {
+    return <h1>Transaction Completed!</h1>;
+  } else if (props.status == ""){
+    return <p></p>
+  }
+  else{
+    return <p></p>;
   }
 }
