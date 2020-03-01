@@ -4,6 +4,7 @@ import Axios from "axios";
 import ReactQueryParams from 'react-query-params';
 import Appbar from './react_components/Appbar';
 import Home from './react_components/View';
+import Status from './react_components/StatusCard';
 import View from "./react_components/View";
 const request = require("request");
 const apiKey = process.env.CHECKBOOK_API_KEY;
@@ -67,12 +68,14 @@ export default class App extends ReactQueryParams {
     return (
       <Router>
 
-       <div><View></View></div>
-        <h1>Email: {this.queryParams.email}</h1>
-        <h1>Cost: {this.queryParams.cost}</h1>
-        <h1>Invoice ID: {this.state.invoice_id}</h1>
-        <h1>Status: {this.state.status}</h1>
-        
+       <div> 
+         <Appbar></Appbar>
+         <Status></Status>
+       </div>
+       <div>Email: {this.queryParams.email}</div>
+       <div>Cost: {this.queryParams.cost}</div>
+       <div>Invoice ID: {this.state.invoice_id}</div>
+       <div>Status: {this.state.status}</div> 
       </Router>
     );
   }

@@ -7,7 +7,7 @@ import Status from './StatusCard';
 
 const app = makeStyles(theme=> ({
 background: 'white',
-
+padding: 0,
 }));
 
 export default function View(){
