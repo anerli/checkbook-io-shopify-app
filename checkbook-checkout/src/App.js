@@ -25,6 +25,13 @@ const apiSecret = process.env.CHECKBOOK_API_SECRET;
 // query parsing function.
 
 export default class App extends Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      invoice_id: ""
+    }
+  }
+  
   componentDidMount(){
     //Axios.post('http://localhost:8000/invoice', {}, {});
     /*
@@ -55,18 +62,34 @@ export default class App extends Component{
     const config={
       headers:{
         "Content-Type":"application/json",
-        "Authorization":"d6aa2703655f4ba2af2a56202961ca86:dXbCgzYBMibj8ZwuQMd2NXr6rtvjZ8",
+        //"Authorization":"d6aa2703655f4ba2af2a56202961ca86:dXbCgzYBMibj8ZwuQMd2NXr6rtvjZ8",
+        "Authorization":"1b0b61ab6279c43ddae790a75774400f:e7a4e3523f08bfe153e56b192b919036",
         "Accept":"application/json"
       }
     };
-  
+    
+    //Axios.post('https://sandbox.checkbook.io/v3/invoice', postObject, config);
     //Axios.post('https://demo.checkbook.io/v3/invoice', postObject, config);
-    Axios.post('http://localhost:8000/invoice', postObject, config);
+    //let id = 
+    var self = this;
+    Axios.post('http://localhost:8000/invoice', postObject, config).then(function(response){
+      let id = response.data;
+      console.log(id);
+      self.setState({
+        invoice_id: id
+      });
+    });
+    //console.log(id);
+    //this.setState({
+    //  invoice_id: id
+    //});
   }
   render(){
     return (
       <Router>
+        
         <QueryParamsDemo />
+      <h1>Invoice ID: {this.state.invoice_id}</h1>
       </Router>
     );
   }

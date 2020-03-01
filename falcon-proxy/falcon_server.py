@@ -18,17 +18,17 @@ class InvoiceProxy:
 
         url = "https://demo.checkbook.io/v3/invoice"
 
-        #payload = "{\"amount\":5,\"description\":\"Test Invoice\",\"name\":\"Potato Company\",\"recipient\":\"rjp1@iastate.edu\"}"
-        #headers = {
-        #    'accept': "application/json",
-        #    'content-type': "application/json",
-        #    'authorization': "d6aa2703655f4ba2af2a56202961ca86:dXbCgzYBMibj8ZwuQMd2NXr6rtvjZ8"
-        #    }
+        payload = "{\"amount\":5,\"description\":\"Test Invoice\",\"name\":\"Potato Company\",\"recipient\":\"rjp1@iastate.edu\"}"
+        headers = {
+            'accept': "application/json",
+            'content-type': "application/json",
+            'authorization': "d6aa2703655f4ba2af2a56202961ca86:dXbCgzYBMibj8ZwuQMd2NXr6rtvjZ8"
+            }
         payload = json.dumps(req.media)#req.body
         print("PAYLOAD:\n" + str(payload))
 
-        headers = req.headers
-        print("HEADERS:\n" + str(payload))
+        #headers = req.headers
+        print("HEADERS:\n" + str(headers))
 
         # We could choose to relay this response or use our own
         response = requests.request("POST", url, data=payload, headers=headers)
@@ -37,8 +37,17 @@ class InvoiceProxy:
 
 
         #resp.set_header('Access-Control-Allow-Origin', '*')
+
+        # We want the falcon server to return the invoice id
+        print("RESPONSE:\n" + str(response))
+        print("ENCODING:\n" + str(response.encoding))
+        print("TEXT:\n" + str(response.text))
+        print("INVOICE ID: " + str(response.json()["id"]))
+
         resp.status = falcon.HTTP_200
-        resp.body = 'Success'
+        resp.body = response.json()["id"]#'Success'
+        #resp.body = 'Success'
+        
 
 app = falcon.API(middleware=[HandleCORS()])
 invoice = InvoiceProxy()
