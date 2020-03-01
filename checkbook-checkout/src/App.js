@@ -6,6 +6,8 @@ import {
 } from "react-router-dom";
 import Axios from "axios";
 
+const request = require('request');
+
 const apiKey = process.env.CHECKBOOK_API_KEY;
 const clientId = process.env.CHECKBOOK_CLIENT_ID;
 const apiSecret = process.env.CHECKBOOK_API_SECRET;
@@ -24,7 +26,42 @@ const apiSecret = process.env.CHECKBOOK_API_SECRET;
 
 export default class App extends Component{
   componentDidMount(){
-
+    //Axios.post('http://localhost:8000/invoice', {}, {});
+    /*
+    var options = {
+      method: 'POST',
+      url: 'https://demo.checkbook.io/v3/invoice',
+      headers: {
+        accept: 'application/json',
+        'content-type': 'application/json',
+        authorization: 'd6aa2703655f4ba2af2a56202961ca86:dXbCgzYBMibj8ZwuQMd2NXr6rtvjZ8'
+      },
+      body: '{"amount":5,"description":"Test Invoice","name":"Potato Company","recipient":"rjp1@iastate.edu"}'
+    };
+    
+    request(options, function (error, response, body) {
+      //if (error) throw new Error(error);
+    
+      console.log(body);
+    });
+    */
+    
+    const postObject={
+      "amount":15,
+      "description":"Potato Purchase",
+      "name":"Mitra",
+      "recipient":"rjp1@iastate.edu"
+    };
+    const config={
+      headers:{
+        "Content-Type":"application/json",
+        "Authorization":"d6aa2703655f4ba2af2a56202961ca86:dXbCgzYBMibj8ZwuQMd2NXr6rtvjZ8",
+        "Accept":"application/json"
+      }
+    };
+  
+    //Axios.post('https://demo.checkbook.io/v3/invoice', postObject, config);
+    Axios.post('http://localhost:8000/invoice', postObject, config);
   }
   render(){
     return (
@@ -45,7 +82,34 @@ function useQuery() {
 function QueryParamsDemo() {
   let query = useQuery();
 
-  
+  // Request invoice
+  //Axios.get('https://swapi.co/api/people/1').then((response)=>{console.log(response)});
+
+  /*
+  const config = {
+    headers: {
+      "accept":'application/json',
+      "content-type": "application/json",
+      "authorization": "d6aa2703655f4ba2af2a56202961ca86:dXbCgzYBMibj8ZwuQMd2NXr6rtvjZ8",
+      "accept":"application/json"
+      //"Access-Control-Allow-Origin":"*"
+      
+    },
+    //withCredentials: false,
+    //auth: {
+    //  username: 'd6aa2703655f4ba2af2a56202961ca86',
+    //  password: 'dXbCgzYBMibj8ZwuQMd2NXr6rtvjZ8'
+    //},
+  }
+  const postObject={
+    //values
+    "amount":query.get("cost"),
+    "description":"Potato Purchase",
+    "name":"Mitra",
+    "recipient":query.get("email")
+  }
+  */
+ 
 
   return (
     <div>
@@ -53,7 +117,4 @@ function QueryParamsDemo() {
       <h1>Cost: {query.get("cost")}</h1>
     </div>
   );
-
-  
-
 }
