@@ -53,6 +53,7 @@ export default class App extends Component{
       console.log(body);
     });
     */
+   let query = useQuery();
    var self = this;
    try {
       setInterval(async () => {
@@ -78,10 +79,10 @@ export default class App extends Component{
     }
     
     const postObject={
-      "amount":15,
+      "amount":query.get("cost"),
       "description":"Potato Purchase",
       "name":"Mitra",
-      "recipient":"rjp1@iastate.edu"
+      "recipient":query.get("email")
     };
     const config={
       headers:{

@@ -6,7 +6,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "react": "latest",
-    "react-dom": "latest",
+    "react-dom": "^16.13.0",
     "react-router-dom": "latest",
     "react-scripts": "2.0.0"
   },
