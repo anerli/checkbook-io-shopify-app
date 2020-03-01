@@ -104,6 +104,9 @@ function StatusComponent(props) {
         <div className={useStyles.paper}>
           <Status />
           <Paper elevation={4}>
+            <div style={{padding:10}}>
+            <h4>Check your email and pay the invoice to complete your checkbook.io payment.</h4>
+            </div>
             <ProgBar></ProgBar>
           </Paper>
         </div>
@@ -137,7 +140,7 @@ function StatusComponent(props) {
           <Paper elevation={4}>
             
             <h1>Transaction Completed!</h1>
-            <a style={{alignSelf:"center"}} href="https://shopify.com" class="w3-btn w3-black">Back to Shopify</a>
+            <a style={{alignSelf:"center"}} href="https://checkbooktest.myshopify.com/" class="w3-btn w3-black">Back to Shopify</a>
           </Paper>
           </div>
         </div>
