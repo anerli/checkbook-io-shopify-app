@@ -28,7 +28,8 @@ export default class App extends Component{
   constructor(props){
     super(props);
     this.state = {
-      invoice_id: ""
+      invoice_id: "",
+      status: ""
     }
   }
   
@@ -52,6 +53,29 @@ export default class App extends Component{
       console.log(body);
     });
     */
+   var self = this;
+   try {
+      setInterval(async () => {
+        /*
+        const res = await fetch('https://api.apijson.com/...');
+        const blocks = await res.json();
+        const dataPanelone = blocks.panelone;
+        const dataPaneltwo = blocks.paneltwo;
+
+        this.setState({
+          panelone: dataPanelone,
+          paneltwo: dataPaneltwo,
+        })
+        */
+        Axios.get("http://localhost:8000/invoice?id="+this.state.invoice_id).then((response)=>{
+          self.setState({
+            status:response.data
+          });
+        });
+      }, 1000);
+    } catch(e) {
+      console.log(e);
+    }
     
     const postObject={
       "amount":15,
@@ -71,7 +95,7 @@ export default class App extends Component{
     //Axios.post('https://sandbox.checkbook.io/v3/invoice', postObject, config);
     //Axios.post('https://demo.checkbook.io/v3/invoice', postObject, config);
     //let id = 
-    var self = this;
+    
     Axios.post('http://localhost:8000/invoice', postObject, config).then(function(response){
       let id = response.data;
       console.log(id);
@@ -90,6 +114,7 @@ export default class App extends Component{
         
         <QueryParamsDemo />
       <h1>Invoice ID: {this.state.invoice_id}</h1>
+      <h1>Status: {this.state.status}</h1>
       </Router>
     );
   }

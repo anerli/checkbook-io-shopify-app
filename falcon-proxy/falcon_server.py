@@ -47,6 +47,21 @@ class InvoiceProxy:
         resp.status = falcon.HTTP_200
         resp.body = response.json()["id"]#'Success'
         #resp.body = 'Success'
+
+    def on_get(self, req, resp):
+        id = req.params["id"]
+        base_url = "https://demo.checkbook.io/v3/invoice/"
+
+        headers = {
+            'accept': "application/json",
+            'content-type': "application/json",
+            'authorization': "d6aa2703655f4ba2af2a56202961ca86:dXbCgzYBMibj8ZwuQMd2NXr6rtvjZ8"
+            }
+
+        response = requests.request("GET", base_url+str(id), headers=headers);
+        print(response.text);
+        resp.status = falcon.HTTP_200
+        resp.body = response.json()["status"]
         
 
 app = falcon.API(middleware=[HandleCORS()])
