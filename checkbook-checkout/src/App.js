@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import {
   BrowserRouter as Router,
   Link,
@@ -21,13 +21,19 @@ import Axios from "axios";
 // syntax, you'll probably need to bring your own
 // query parsing function.
 
-export default function QueryParamsExample() {
-  return (
-    <Router>
-      <QueryParamsDemo />
-    </Router>
-  );
+export default class App extends Component{
+  componentDidMount(){
+
+  }
+  render(){
+    return (
+      <Router>
+        <QueryParamsDemo />
+      </Router>
+    );
+  }
 }
+
 
 // A custom hook that builds on useLocation to parse
 // the query string for you.
