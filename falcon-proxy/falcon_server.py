@@ -61,8 +61,8 @@ class InvoiceProxy:
         response = requests.request("GET", base_url+str(id), headers=headers);
         print(response.text);
         resp.status = falcon.HTTP_200
-        #resp.body = response.json()["status"]
-        resp.body = "PAID"
+        resp.body = response.json()["status"]
+        #resp.body = "PAID"
         
 
 app = falcon.API(middleware=[HandleCORS()])
