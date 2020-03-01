@@ -38,43 +38,5 @@ function QueryParamsDemo() {
       <h1>Email: {query.get("email")}</h1>
       <h1>Cost: {query.get("cost")}</h1>
     </div>
-    /*
-    <div>
-      <div>
-        <h2>Accounts</h2>
-        <ul>
-          <li>
-            <Link to="/account?name=netflix">Netflix</Link>
-          </li>
-          <li>
-            <Link to="/account?name=zillow-group">Zillow Group</Link>
-          </li>
-          <li>
-            <Link to="/account?name=yahoo">Yahoo</Link>
-          </li>
-          <li>
-            <Link to="/account?name=modus-create">Modus Create</Link>
-          </li>
-        </ul>
-
-        <Child name={query.get("name")} />
-      </div>
-    </div>
-    */
-  );
-}
-
-function Child({ name }) {
-  return (
-    <div>
-      {name ? (
-        <h3>
-          The <code>name</code> in the query string is &quot;{name}
-          &quot;
-        </h3>
-      ) : (
-        <h3>There is no name in the query string</h3>
-      )}
-    </div>
   );
 }
