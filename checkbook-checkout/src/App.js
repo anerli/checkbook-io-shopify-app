@@ -110,7 +110,40 @@ function StatusComponent(props) {
       </div>
     );
   } else if (props.status == "PAID") {
-    return <h1>Transaction Completed!</h1>;
+    //return <h1>Transaction Completed!</h1>;
+    return (
+      <div style={{padding:50}}>
+        <div style={{
+          
+          color: 'rgb(240,240,240)',
+          //display: 'flex',
+          //flexWrap: 'wrap',
+          position: 'absolute', left: '50%', top: '50%',
+          transform: 'translate(-50%, -50%)',
+          /*
+          '& > *': {
+            margin: 10,
+            width: 20,
+            height: 30,
+            padding: 20,
+          },
+          */
+          
+          //width: "50%",
+          //height: "50%",
+          //padding:500,
+        }}>
+          <div style={{padding:50}}>
+          <Paper elevation={4}>
+            
+            <h1>Transaction Completed!</h1>
+            <a style={{alignSelf:"center"}} href="https://shopify.com" class="w3-btn w3-black">Back to Shopify</a>
+          </Paper>
+          </div>
+        </div>
+      </div>
+    );
+    
   } else if (props.status == ""){
     return <p></p>
   }
