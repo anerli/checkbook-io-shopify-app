@@ -4,11 +4,12 @@ import {
   Link,
   useLocation
 } from "react-router-dom";
+import Axios from "axios";
 
 const apiKey = process.env.CHECKBOOK_API_KEY;
 const clientId = process.env.CHECKBOOK_CLIENT_ID;
 const apiSecret = process.env.CHECKBOOK_API_SECRET;
-import Axios from "axios";
+
 
 // React Router does not have any opinions about
 // how you should parse URL query strings.
