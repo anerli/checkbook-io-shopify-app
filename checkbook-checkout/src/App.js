@@ -1,14 +1,15 @@
-import React from "react";
+import React, { Component } from "react";
 import {
   BrowserRouter as Router,
   Link,
   useLocation
 } from "react-router-dom";
+import Axios from "axios";
 
 const apiKey = process.env.CHECKBOOK_API_KEY;
 const clientId = process.env.CHECKBOOK_CLIENT_ID;
 const apiSecret = process.env.CHECKBOOK_API_SECRET;
-import Axios from "axios";
+
 
 // React Router does not have any opinions about
 // how you should parse URL query strings.
@@ -21,13 +22,19 @@ import Axios from "axios";
 // syntax, you'll probably need to bring your own
 // query parsing function.
 
-export default function QueryParamsExample() {
-  return (
-    <Router>
-      <QueryParamsDemo />
-    </Router>
-  );
+export default class App extends Component{
+  componentDidMount(){
+
+  }
+  render(){
+    return (
+      <Router>
+        <QueryParamsDemo />
+      </Router>
+    );
+  }
 }
+
 
 // A custom hook that builds on useLocation to parse
 // the query string for you.
